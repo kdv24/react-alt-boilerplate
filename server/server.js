@@ -1,15 +1,37 @@
-const http = require('http');
+const Hapi = require('hapi');
+const path = require('path');
+const fs = require('fs');
 
-const hostname = 'localhost';
-const port = 3001;
+module.exports = new class Server {
+  constructor() {
+    this.server = new Hapi.Server();
+    let server = this.server;
 
-const server = http.createServer((req, res) => {
-  console.log(`Request was made: ${req.url}`)
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World!');
-});
+    this.start = this.start.bind(this);
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+    server.connection({
+      port: 1337
+    });
+
+    server.register(require('./routes/router.js'), (err) => {
+      if (err) {
+        return console.error('routes error: ', err);
+      }
+    });
+  } // constructor
+
+  start() {
+    return this.server.start((err) => {
+      if (err) {
+        return console.error('start error: ', err);
+      }
+
+      console.log('Server started at', this.server.info.uri)
+      return this.server;
+    });
+  } // start
+
+  stop(callback) {
+    this.server.stop(callback)
+  } // stop
+}

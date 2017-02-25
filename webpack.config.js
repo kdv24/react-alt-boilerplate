@@ -28,7 +28,7 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, 'server/assets/client/'),
+    path: path.resolve(__dirname, 'server/assets/client/js/'),
     filename: 'app.min.js'
   },
   plugins: debug ? [] : [
