@@ -24,7 +24,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "dev": "webpack-dev-server --content-base client --inline --hot",
+    "dev": "webpack-dev-server --content-base server/assets/client --inline --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "monkecheese",

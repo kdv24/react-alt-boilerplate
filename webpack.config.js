@@ -5,13 +5,13 @@ var path = require('path');
 module.exports = {
   context: path.join(__dirname, 'client'),
   devtool: debug ? "inline-sourcemap" : null,
-  entry: "./js/app.js",
+  entry: "./app.js",
   resolve: {
     alias: {
-      actions: `${__dirname}/client/js/actions`,
-      components: `${__dirname}/client/js/components`,
-      pages: `${__dirname}/client/js/pages`,
-      stores: `${__dirname}/client/js/stores`
+      actions: `${__dirname}/client/actions`,
+      components: `${__dirname}/client/components`,
+      pages: `${__dirname}/client/pages`,
+      stores: `${__dirname}/client/stores`
     }
   },
   module: {
@@ -28,7 +28,7 @@ module.exports = {
     ]
   },
   output: {
-    path: __dirname + '/client/',
+    path: path.resolve(__dirname, 'server/assets/client/'),
     filename: 'app.min.js'
   },
   plugins: debug ? [] : [
